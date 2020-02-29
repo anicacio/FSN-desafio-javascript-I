@@ -39,6 +39,22 @@ const alunosDaEscola = [{
 
 // implementação
 
+const adicionarAluno = (nome) => {
+
+    /*Essa função irá receber uma *string* que é nome do aluno a ser criado. 
+    E seguindo o modelo de aluno, o mesmo deverá ser inserido na lista de alunos.
+    A função deve devolver um feedback de sucesso, caso o aluno seja inserido corretamente.*/
+
+    alunosDaEscola.push({
+        nome: nome,
+        notas: [],
+        cursos: [],
+        faltas: 0
+    });
+
+    console.log(`${nome} adicionado a lista de aluno com sucesso!`)
+};
+
 const listarAlunos = () => {
     /*Com essa função o usuário poderá ver todos os alunos cadastrados atualmente no sistema. 
     Vale dizer que As informações deverão ser exibidas em um formato amigável.*/

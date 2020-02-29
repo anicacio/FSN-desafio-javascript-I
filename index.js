@@ -16,7 +16,7 @@ const alunosDaEscola = [{
     faltas: 0
 }, {
     nome: "Guilherme",
-    notas: [10, 9.8, 9.6],
+    notas: [1, 5, 6], // Alterado o Guilherme para ter nota baixa para teste!!!! 
     cursos: [{
         nomeDoCurso: "Full Stack",
         dataMatricula: new Date
@@ -118,8 +118,9 @@ const aplicarFalta = (aluno) => {
     */
     let alunoExistente = buscarAlunoInterna(aluno.nome);
     if (alunoExistente) {
-        if(alunoExistente.cursos.length != 0){
-            console.log(`Falta Aplicada para o aluno ${alunoExistente.nome}, estava com ${alunoExistente.faltas++} agora está com ${alunoExistente.faltas}`);
+        if (alunoExistente.cursos.length > 0) {
+            alunoExistente.faltas++
+            console.log(`Falta aplicada para ${alunoExistente.nome}, total de faltas: ${alunoExistente.faltas}`);
         } else {
             console.log("Aluno não matriculado em nenhum curso!");
         }
@@ -128,18 +129,52 @@ const aplicarFalta = (aluno) => {
     };
 };
 
-// function aplicarNota(aluno: object) {
-//     /*
-//      Ao receber um aluno devidamente cadastrado em nossa lista. Você deverá adicionar uma nota ao aluno na sua lista de notas. Você deverá dar um feedback ao concluir a tarefa. Só poderá aplicar nota em aluno se o mesmo tiver matriculado em um curso.
-//     */
-// };
+const aplicarNota = (aluno, nota) => {
+    /*
+     Ao receber um aluno devidamente cadastrado em nossa lista. Você deverá adicionar uma nota ao aluno na sua lista de notas. Você deverá dar um feedback ao concluir a tarefa. Só poderá aplicar nota em aluno se o mesmo tiver matriculado em um curso.
+    */
+    // Adicionado parametro nota, pois é necessário!!!!
 
-// function aprovarAluno(aluno: object) {
-//     /* 
-//     Ao receber um aluno devidamente cadastrado em nossa lista, deverá dizer se o mesmo está aprovado ou não. Os critérios de aprovação são: ter no máximo 3 faltas e média 7 em notas.
-//     Só o aluno só poderá ser aprovado se o mesmo tiver matriculado em um curso.
-//     */
-// };
+    let alunoExistente = buscarAlunoInterna(aluno.nome);
+    if (alunoExistente) {
+        if (alunoExistente.cursos.length > 0) {
+            alunoExistente.notas.push(nota)
+            console.log(`Nota adicionada para o aluno ${alunoExistente.nome}`);
+        } else {
+            console.log("Aluno não matriculado em nenhum curso!");
+        }
+    } else {
+        console.log("Aluno não encontrado!");
+    };
+
+};
+
+const aprovarAluno = (aluno) => {
+    /* 
+    Ao receber um aluno devidamente cadastrado em nossa lista, deverá dizer se o mesmo está aprovado ou não. Os critérios de aprovação são: ter no máximo 3 faltas e média 7 em notas.
+    Só o aluno só poderá ser aprovado se o mesmo tiver matriculado em um curso.
+    */
+
+    let alunoExistente = buscarAlunoInterna(aluno.nome);
+    if (alunoExistente) {
+        if (alunoExistente.cursos.length > 0) {
+            const calcularMedia = () => {
+                let soma = alunoExistente.notas.reduce((pilha, nota) => {
+                    return pilha + nota;
+                });
+                return (soma / alunoExistente.notas.length);
+            };
+            console.log(`Aluno ${alunoExistente.nome} está ${(calcularMedia() >= 7 && alunoExistente.faltas <= 3) ? "Aprovado!" : "Reprovado!"}`);
+        } else {
+            console.log("Aluno não matriculado em nenhum curso!");
+        }
+    } else {
+        console.log("Aluno não encontrado!");
+    };
+};
+
+
+// AREA DE TESTES
 
 // adicionarAluno("Anderson Nicácio");
 
@@ -154,3 +189,11 @@ const aplicarFalta = (aluno) => {
 // aplicarFalta(buscarAlunoInterna("Anderson")); // Aluno não cadastrado
 
 // listarAlunos();
+
+// aplicarNota(buscarAlunoInterna("Carlos",5)); // Aluno sem curso
+// aplicarNota(buscarAlunoInterna("Lucca",5)); // Aluno com curso
+// aplicarNota(buscarAlunoInterna("Anderson",5)); // Aluno não cadastrado
+
+aprovarAluno(buscarAlunoInterna("Guilherme")); // Aluno sem curso
+aprovarAluno(buscarAlunoInterna("Lucca")); // Aluno com curso
+aprovarAluno(buscarAlunoInterna("Anderson")); // Aluno não cadastrado

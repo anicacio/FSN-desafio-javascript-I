@@ -88,6 +88,10 @@ const buscarAluno = (nome) => {
 };
 
 const buscarAlunoInterna = (nome) => {
+
+    //Função criada a partir da buscarAluno só que essa não fica mostrando nada no console.
+    //Usada para auxiliar na busca dos alunos em outras funções.
+
     let alunoExistente = alunosDaEscola.filter(aluno => (aluno.nome == nome));
     if (alunoExistente.length != 0) {
         return alunoExistente[0]
@@ -176,7 +180,7 @@ const aprovarAluno = (aluno) => {
 
 // AREA DE TESTES
 
-// adicionarAluno("Anderson Nicácio");
+// adicionarAluno("Anderson"); //Aluno novo
 
 // matricularAluno(buscarAlunoInterna("Lucca"),"Full Stack"); // Aluno cadastrado
 // matricularAluno(buscarAlunoInterna("Anderson"),"Full Stack"); // Aluno não cadastrado
@@ -194,6 +198,6 @@ const aprovarAluno = (aluno) => {
 // aplicarNota(buscarAlunoInterna("Lucca",5)); // Aluno com curso
 // aplicarNota(buscarAlunoInterna("Anderson",5)); // Aluno não cadastrado
 
-aprovarAluno(buscarAlunoInterna("Guilherme")); // Aluno sem curso
-aprovarAluno(buscarAlunoInterna("Lucca")); // Aluno com curso
-aprovarAluno(buscarAlunoInterna("Anderson")); // Aluno não cadastrado
+// aprovarAluno(buscarAlunoInterna("Guilherme")); // Aluno sem curso
+// aprovarAluno(buscarAlunoInterna("Lucca")); // Aluno com curso
+// aprovarAluno(buscarAlunoInterna("Anderson")); // Aluno não cadastrado
